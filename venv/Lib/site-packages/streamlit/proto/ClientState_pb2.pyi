@@ -36,11 +36,13 @@ class ContextInfo(google.protobuf.message.Message):
     LOCALE_FIELD_NUMBER: builtins.int
     URL_FIELD_NUMBER: builtins.int
     IS_EMBEDDED_FIELD_NUMBER: builtins.int
+    COLOR_SCHEME_FIELD_NUMBER: builtins.int
     timezone: builtins.str
     timezone_offset: builtins.int
     locale: builtins.str
     url: builtins.str
     is_embedded: builtins.bool
+    color_scheme: builtins.str
     def __init__(
         self,
         *,
@@ -49,9 +51,12 @@ class ContextInfo(google.protobuf.message.Message):
         locale: builtins.str | None = ...,
         url: builtins.str | None = ...,
         is_embedded: builtins.bool | None = ...,
+        color_scheme: builtins.str | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["_is_embedded", b"_is_embedded", "_locale", b"_locale", "_timezone", b"_timezone", "_timezone_offset", b"_timezone_offset", "_url", b"_url", "is_embedded", b"is_embedded", "locale", b"locale", "timezone", b"timezone", "timezone_offset", b"timezone_offset", "url", b"url"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["_is_embedded", b"_is_embedded", "_locale", b"_locale", "_timezone", b"_timezone", "_timezone_offset", b"_timezone_offset", "_url", b"_url", "is_embedded", b"is_embedded", "locale", b"locale", "timezone", b"timezone", "timezone_offset", b"timezone_offset", "url", b"url"]) -> None: ...
+    def HasField(self, field_name: typing.Literal["_color_scheme", b"_color_scheme", "_is_embedded", b"_is_embedded", "_locale", b"_locale", "_timezone", b"_timezone", "_timezone_offset", b"_timezone_offset", "_url", b"_url", "color_scheme", b"color_scheme", "is_embedded", b"is_embedded", "locale", b"locale", "timezone", b"timezone", "timezone_offset", b"timezone_offset", "url", b"url"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["_color_scheme", b"_color_scheme", "_is_embedded", b"_is_embedded", "_locale", b"_locale", "_timezone", b"_timezone", "_timezone_offset", b"_timezone_offset", "_url", b"_url", "color_scheme", b"color_scheme", "is_embedded", b"is_embedded", "locale", b"locale", "timezone", b"timezone", "timezone_offset", b"timezone_offset", "url", b"url"]) -> None: ...
+    @typing.overload
+    def WhichOneof(self, oneof_group: typing.Literal["_color_scheme", b"_color_scheme"]) -> typing.Literal["color_scheme"] | None: ...
     @typing.overload
     def WhichOneof(self, oneof_group: typing.Literal["_is_embedded", b"_is_embedded"]) -> typing.Literal["is_embedded"] | None: ...
     @typing.overload

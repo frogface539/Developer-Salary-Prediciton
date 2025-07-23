@@ -41,6 +41,7 @@ class Code(google.protobuf.message.Message):
     show_line_numbers: builtins.bool
     wrap_lines: builtins.bool
     height: builtins.int
+    """deprecated use height on Element.proto"""
     def __init__(
         self,
         *,

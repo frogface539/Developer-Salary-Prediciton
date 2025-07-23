@@ -20,7 +20,7 @@
 
 from __future__ import annotations
 
-from typing import TYPE_CHECKING, Final, cast
+from typing import TYPE_CHECKING, Any, Final, cast
 
 from streamlit import logger
 from streamlit.connections import BaseConnection
@@ -40,6 +40,10 @@ if TYPE_CHECKING:
     from snowflake.connector import (  # type:ignore[import] # isort: skip
         SnowflakeConnection as InternalSnowflakeConnection,
     )
+
+# the ANSI-compliant SQL code for "connection was not established"
+# (see docs: https://docs.snowflake.com/en/developer-guide/python-connector/python-connector-api#id6)
+SQLSTATE_CONNECTION_WAS_NOT_ESTABLISHED: Final = "08001"
 
 
 class SnowflakeConnection(BaseConnection["InternalSnowflakeConnection"]):
@@ -218,7 +222,7 @@ class SnowflakeConnection(BaseConnection["InternalSnowflakeConnection"]):
 
     """
 
-    def _connect(self, **kwargs) -> InternalSnowflakeConnection:
+    def _connect(self, **kwargs: Any) -> InternalSnowflakeConnection:
         import snowflake.connector  # type:ignore[import]
         from snowflake.connector import Error as SnowflakeError  # type:ignore[import]
 
@@ -263,16 +267,17 @@ class SnowflakeConnection(BaseConnection["InternalSnowflakeConnection"]):
                 return snowflake.connector.connect()
 
             return snowflake.connector.connect(**kwargs)
-        except SnowflakeError as e:
+        except SnowflakeError:
             if not len(st_secrets) and not kwargs:
                 raise StreamlitAPIException(
                     "Missing Snowflake connection configuration. "
                     "Did you forget to set this in `secrets.toml`, a Snowflake configuration file, "
                     "or as kwargs to `st.connection`? "
-                    "See the [SnowflakeConnection configuration documentation](https://docs.streamlit.io/st.connections.snowflakeconnection-configuration) "
+                    "See the [SnowflakeConnection configuration documentation]"
+                    "(https://docs.streamlit.io/st.connections.snowflakeconnection-configuration) "
                     "for more details and examples."
                 )
-            raise e
+            raise
 
     def query(
         self,
@@ -280,8 +285,8 @@ class SnowflakeConnection(BaseConnection["InternalSnowflakeConnection"]):
         *,  # keyword-only arguments:
         ttl: float | int | timedelta | None = None,
         show_spinner: bool | str = "Running `snowflake.query(...)`.",
-        params=None,
-        **kwargs,
+        params: Any = None,
+        **kwargs: Any,
     ) -> DataFrame:
         """Run a read-only SQL query.
 
@@ -334,9 +339,6 @@ class SnowflakeConnection(BaseConnection["InternalSnowflakeConnection"]):
         """
         from tenacity import retry, retry_if_exception, stop_after_attempt, wait_fixed
 
-        # the ANSI-compliant SQL code for "connection was not established" (see docs: https://docs.snowflake.com/en/developer-guide/python-connector/python-connector-api#id6)
-        SQLSTATE_CONNECTION_WAS_NOT_ESTABLISHED = "08001"
-
         @retry(
             after=lambda _: self.reset(),
             stop=stop_after_attempt(3),
@@ -377,7 +379,7 @@ class SnowflakeConnection(BaseConnection["InternalSnowflakeConnection"]):
         database: str | None = None,
         schema: str | None = None,
         chunk_size: int | None = None,
-        **kwargs,
+        **kwargs: Any,
     ) -> tuple[bool, int, int]:
         """Write a ``pandas.DataFrame`` to a table in a Snowflake database.
 

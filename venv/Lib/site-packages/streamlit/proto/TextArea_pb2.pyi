@@ -45,6 +45,7 @@ class TextArea(google.protobuf.message.Message):
     label: builtins.str
     default: builtins.str
     height: builtins.int
+    """deprecated. Use heightConfig on Element.proto."""
     max_chars: builtins.int
     help: builtins.str
     form_id: builtins.str

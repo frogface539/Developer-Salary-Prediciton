@@ -21,6 +21,9 @@ import builtins
 import google.protobuf.descriptor
 import google.protobuf.internal.enum_type_wrapper
 import google.protobuf.message
+import streamlit.proto.GapSize_pb2
+import streamlit.proto.HeightConfig_pb2
+import streamlit.proto.WidthConfig_pb2
 import sys
 import typing
 
@@ -66,6 +69,48 @@ class Block(google.protobuf.message.Message):
         def ClearField(self, field_name: typing.Literal["gap", b"gap"]) -> None: ...
 
     @typing.final
+    class FlexContainer(google.protobuf.message.Message):
+        DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+        class _Direction:
+            ValueType = typing.NewType("ValueType", builtins.int)
+            V: typing_extensions.TypeAlias = ValueType
+
+        class _DirectionEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[Block.FlexContainer._Direction.ValueType], builtins.type):
+            DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
+            DIRECTION_UNDEFINED: Block.FlexContainer._Direction.ValueType  # 0
+            VERTICAL: Block.FlexContainer._Direction.ValueType  # 1
+            HORIZONTAL: Block.FlexContainer._Direction.ValueType  # 2
+
+        class Direction(_Direction, metaclass=_DirectionEnumTypeWrapper): ...
+        DIRECTION_UNDEFINED: Block.FlexContainer.Direction.ValueType  # 0
+        VERTICAL: Block.FlexContainer.Direction.ValueType  # 1
+        HORIZONTAL: Block.FlexContainer.Direction.ValueType  # 2
+
+        BORDER_FIELD_NUMBER: builtins.int
+        GAP_CONFIG_FIELD_NUMBER: builtins.int
+        SCALE_FIELD_NUMBER: builtins.int
+        DIRECTION_FIELD_NUMBER: builtins.int
+        WRAP_FIELD_NUMBER: builtins.int
+        border: builtins.bool
+        scale: builtins.float
+        direction: global___Block.FlexContainer.Direction.ValueType
+        wrap: builtins.bool
+        @property
+        def gap_config(self) -> streamlit.proto.GapSize_pb2.GapConfig: ...
+        def __init__(
+            self,
+            *,
+            border: builtins.bool = ...,
+            gap_config: streamlit.proto.GapSize_pb2.GapConfig | None = ...,
+            scale: builtins.float = ...,
+            direction: global___Block.FlexContainer.Direction.ValueType = ...,
+            wrap: builtins.bool = ...,
+        ) -> None: ...
+        def HasField(self, field_name: typing.Literal["gap_config", b"gap_config"]) -> builtins.bool: ...
+        def ClearField(self, field_name: typing.Literal["border", b"border", "direction", b"direction", "gap_config", b"gap_config", "scale", b"scale", "wrap", b"wrap"]) -> None: ...
+
+    @typing.final
     class Column(google.protobuf.message.Message):
         DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
@@ -88,10 +133,14 @@ class Block(google.protobuf.message.Message):
         GAP_FIELD_NUMBER: builtins.int
         VERTICAL_ALIGNMENT_FIELD_NUMBER: builtins.int
         SHOW_BORDER_FIELD_NUMBER: builtins.int
+        GAP_CONFIG_FIELD_NUMBER: builtins.int
         weight: builtins.float
         gap: builtins.str
+        """Deprecated. Use gap_size"""
         vertical_alignment: global___Block.Column.VerticalAlignment.ValueType
         show_border: builtins.bool
+        @property
+        def gap_config(self) -> streamlit.proto.GapSize_pb2.GapConfig: ...
         def __init__(
             self,
             *,
@@ -99,8 +148,11 @@ class Block(google.protobuf.message.Message):
             gap: builtins.str = ...,
             vertical_alignment: global___Block.Column.VerticalAlignment.ValueType = ...,
             show_border: builtins.bool = ...,
+            gap_config: streamlit.proto.GapSize_pb2.GapConfig | None = ...,
         ) -> None: ...
-        def ClearField(self, field_name: typing.Literal["gap", b"gap", "show_border", b"show_border", "vertical_alignment", b"vertical_alignment", "weight", b"weight"]) -> None: ...
+        def HasField(self, field_name: typing.Literal["_gap_config", b"_gap_config", "gap_config", b"gap_config"]) -> builtins.bool: ...
+        def ClearField(self, field_name: typing.Literal["_gap_config", b"_gap_config", "gap", b"gap", "gap_config", b"gap_config", "show_border", b"show_border", "vertical_alignment", b"vertical_alignment", "weight", b"weight"]) -> None: ...
+        def WhichOneof(self, oneof_group: typing.Literal["_gap_config", b"_gap_config"]) -> typing.Literal["gap_config"] | None: ...
 
     @typing.final
     class Expandable(google.protobuf.message.Message):
@@ -272,8 +324,11 @@ class Block(google.protobuf.message.Message):
     CHAT_MESSAGE_FIELD_NUMBER: builtins.int
     POPOVER_FIELD_NUMBER: builtins.int
     DIALOG_FIELD_NUMBER: builtins.int
+    FLEX_CONTAINER_FIELD_NUMBER: builtins.int
     ALLOW_EMPTY_FIELD_NUMBER: builtins.int
     ID_FIELD_NUMBER: builtins.int
+    HEIGHT_CONFIG_FIELD_NUMBER: builtins.int
+    WIDTH_CONFIG_FIELD_NUMBER: builtins.int
     allow_empty: builtins.bool
     id: builtins.str
     @property
@@ -296,6 +351,12 @@ class Block(google.protobuf.message.Message):
     def popover(self) -> global___Block.Popover: ...
     @property
     def dialog(self) -> global___Block.Dialog: ...
+    @property
+    def flex_container(self) -> global___Block.FlexContainer: ...
+    @property
+    def height_config(self) -> streamlit.proto.HeightConfig_pb2.HeightConfig: ...
+    @property
+    def width_config(self) -> streamlit.proto.WidthConfig_pb2.WidthConfig: ...
     def __init__(
         self,
         *,
@@ -309,14 +370,21 @@ class Block(google.protobuf.message.Message):
         chat_message: global___Block.ChatMessage | None = ...,
         popover: global___Block.Popover | None = ...,
         dialog: global___Block.Dialog | None = ...,
+        flex_container: global___Block.FlexContainer | None = ...,
         allow_empty: builtins.bool = ...,
         id: builtins.str | None = ...,
+        height_config: streamlit.proto.HeightConfig_pb2.HeightConfig | None = ...,
+        width_config: streamlit.proto.WidthConfig_pb2.WidthConfig | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["_id", b"_id", "chat_message", b"chat_message", "column", b"column", "dialog", b"dialog", "expandable", b"expandable", "form", b"form", "horizontal", b"horizontal", "id", b"id", "popover", b"popover", "tab", b"tab", "tab_container", b"tab_container", "type", b"type", "vertical", b"vertical"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["_id", b"_id", "allow_empty", b"allow_empty", "chat_message", b"chat_message", "column", b"column", "dialog", b"dialog", "expandable", b"expandable", "form", b"form", "horizontal", b"horizontal", "id", b"id", "popover", b"popover", "tab", b"tab", "tab_container", b"tab_container", "type", b"type", "vertical", b"vertical"]) -> None: ...
+    def HasField(self, field_name: typing.Literal["_height_config", b"_height_config", "_id", b"_id", "_width_config", b"_width_config", "chat_message", b"chat_message", "column", b"column", "dialog", b"dialog", "expandable", b"expandable", "flex_container", b"flex_container", "form", b"form", "height_config", b"height_config", "horizontal", b"horizontal", "id", b"id", "popover", b"popover", "tab", b"tab", "tab_container", b"tab_container", "type", b"type", "vertical", b"vertical", "width_config", b"width_config"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["_height_config", b"_height_config", "_id", b"_id", "_width_config", b"_width_config", "allow_empty", b"allow_empty", "chat_message", b"chat_message", "column", b"column", "dialog", b"dialog", "expandable", b"expandable", "flex_container", b"flex_container", "form", b"form", "height_config", b"height_config", "horizontal", b"horizontal", "id", b"id", "popover", b"popover", "tab", b"tab", "tab_container", b"tab_container", "type", b"type", "vertical", b"vertical", "width_config", b"width_config"]) -> None: ...
+    @typing.overload
+    def WhichOneof(self, oneof_group: typing.Literal["_height_config", b"_height_config"]) -> typing.Literal["height_config"] | None: ...
     @typing.overload
     def WhichOneof(self, oneof_group: typing.Literal["_id", b"_id"]) -> typing.Literal["id"] | None: ...
     @typing.overload
-    def WhichOneof(self, oneof_group: typing.Literal["type", b"type"]) -> typing.Literal["vertical", "horizontal", "column", "expandable", "form", "tab_container", "tab", "chat_message", "popover", "dialog"] | None: ...
+    def WhichOneof(self, oneof_group: typing.Literal["_width_config", b"_width_config"]) -> typing.Literal["width_config"] | None: ...
+    @typing.overload
+    def WhichOneof(self, oneof_group: typing.Literal["type", b"type"]) -> typing.Literal["vertical", "horizontal", "column", "expandable", "form", "tab_container", "tab", "chat_message", "popover", "dialog", "flex_container"] | None: ...
 
 global___Block = Block

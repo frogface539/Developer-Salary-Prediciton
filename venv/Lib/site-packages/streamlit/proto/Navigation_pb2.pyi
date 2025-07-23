@@ -48,6 +48,8 @@ class Navigation(google.protobuf.message.Message):
         """do not display the navigation"""
         SIDEBAR: Navigation._Position.ValueType  # 1
         """display navigation in the sidebar"""
+        TOP: Navigation._Position.ValueType  # 2
+        """display navigation in the top header"""
 
     class Position(_Position, metaclass=_PositionEnumTypeWrapper):
         """Position of the Navigation"""
@@ -56,6 +58,8 @@ class Navigation(google.protobuf.message.Message):
     """do not display the navigation"""
     SIDEBAR: Navigation.Position.ValueType  # 1
     """display navigation in the sidebar"""
+    TOP: Navigation.Position.ValueType  # 2
+    """display navigation in the top header"""
 
     SECTIONS_FIELD_NUMBER: builtins.int
     APP_PAGES_FIELD_NUMBER: builtins.int

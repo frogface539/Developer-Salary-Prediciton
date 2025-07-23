@@ -73,7 +73,7 @@ class DeckGlJsonChart(google.protobuf.message.Message):
     id: builtins.str
     """ID, required for selection events."""
     mapbox_token: builtins.str
-    """The user-configured Mapbox token. If empty, the token id fetched from https://data.streamlit.io/tokens.json"""
+    """The Mapbox token, if any."""
     width: builtins.int
     """Width in pixels"""
     height: builtins.int

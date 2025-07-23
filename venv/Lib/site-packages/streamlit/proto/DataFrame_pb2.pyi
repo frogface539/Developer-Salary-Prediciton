@@ -29,7 +29,7 @@ DESCRIPTOR: google.protobuf.descriptor.FileDescriptor
 
 @typing.final
 class DataFrame(google.protobuf.message.Message):
-    """DEPRECATED: This proto message is deprecated and unsused. Use Arrow.proto instead.
+    """DEPRECATED: This proto message is deprecated and unused. Use Arrow.proto instead.
     Represents a pandas DataFrame.
     """
 

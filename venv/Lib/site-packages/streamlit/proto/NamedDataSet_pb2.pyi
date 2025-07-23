@@ -27,7 +27,7 @@ DESCRIPTOR: google.protobuf.descriptor.FileDescriptor
 
 @typing.final
 class NamedDataSet(google.protobuf.message.Message):
-    """DEPRECATED: This proto message is deprecated and unsused.
+    """DEPRECATED: This proto message is deprecated and unused.
     A dataset that can be referenced by name.
     """
 

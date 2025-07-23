@@ -20,6 +20,7 @@ limitations under the License.
 import builtins
 import google.protobuf.descriptor
 import google.protobuf.message
+import streamlit.proto.WidthConfig_pb2
 import typing
 
 DESCRIPTOR: google.protobuf.descriptor.FileDescriptor
@@ -34,6 +35,7 @@ class Audio(google.protobuf.message.Message):
     LOOP_FIELD_NUMBER: builtins.int
     AUTOPLAY_FIELD_NUMBER: builtins.int
     ID_FIELD_NUMBER: builtins.int
+    WIDTH_CONFIG_FIELD_NUMBER: builtins.int
     url: builtins.str
     start_time: builtins.int
     """The currentTime attribute of the HTML <audio> tag's <source> subtag."""
@@ -43,6 +45,8 @@ class Audio(google.protobuf.message.Message):
     """Indicates whether the audio should start over from the beginning once it ends."""
     autoplay: builtins.bool
     id: builtins.str
+    @property
+    def width_config(self) -> streamlit.proto.WidthConfig_pb2.WidthConfig: ...
     def __init__(
         self,
         *,
@@ -52,7 +56,10 @@ class Audio(google.protobuf.message.Message):
         loop: builtins.bool = ...,
         autoplay: builtins.bool = ...,
         id: builtins.str = ...,
+        width_config: streamlit.proto.WidthConfig_pb2.WidthConfig | None = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing.Literal["autoplay", b"autoplay", "end_time", b"end_time", "id", b"id", "loop", b"loop", "start_time", b"start_time", "url", b"url"]) -> None: ...
+    def HasField(self, field_name: typing.Literal["_width_config", b"_width_config", "width_config", b"width_config"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["_width_config", b"_width_config", "autoplay", b"autoplay", "end_time", b"end_time", "id", b"id", "loop", b"loop", "start_time", b"start_time", "url", b"url", "width_config", b"width_config"]) -> None: ...
+    def WhichOneof(self, oneof_group: typing.Literal["_width_config", b"_width_config"]) -> typing.Literal["width_config"] | None: ...
 
 global___Audio = Audio

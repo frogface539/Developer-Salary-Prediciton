@@ -1,1 +1,60 @@
-Notebooks/survey_results_public.csv
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*.so
+
+# Virtual environments
+venv/
+env/
+ENV/
+.venv/
+*.egg-info/
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints/
+
+# Model files
+*.pkl
+*.joblib
+
+# OS / IDE specific
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Logs and cache
+*.log
+.cache/
+*.gz
+
+# Streamlit cache
+.streamlit/config.toml
+.streamlit/secrets.toml
+
+# Data files
+*.csv
+*.tsv
+*.zip
+
+# Notebook output
+*.out
+*.bak
+
+# Environment variable files
+.env
+
+# Build artifacts
+dist/
+build/
+*.egg
+
+# Coverage and test reports
+htmlcov/
+coverage.xml
+*.cover
+.pytest_cache/
+
+# Dependency lock files (optional)
+poetry.lock
+Pipfile.lock

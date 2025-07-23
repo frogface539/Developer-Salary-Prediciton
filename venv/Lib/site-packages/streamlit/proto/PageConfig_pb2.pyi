@@ -47,12 +47,20 @@ class PageConfig(google.protobuf.message.Message):
         """Render page elements in a centered block, roughly 730px wide."""
         WIDE: PageConfig._Layout.ValueType  # 1
         """Use the full browser width to render elements."""
+        LAYOUT_UNSET: PageConfig._Layout.ValueType  # 2
+        """Unset distinguishes that config was not provided - on initial call, will
+        set to centered as default. Otherwise, inherit value from previous call
+        """
 
     class Layout(_Layout, metaclass=_LayoutEnumTypeWrapper): ...
     CENTERED: PageConfig.Layout.ValueType  # 0
     """Render page elements in a centered block, roughly 730px wide."""
     WIDE: PageConfig.Layout.ValueType  # 1
     """Use the full browser width to render elements."""
+    LAYOUT_UNSET: PageConfig.Layout.ValueType  # 2
+    """Unset distinguishes that config was not provided - on initial call, will
+    set to centered as default. Otherwise, inherit value from previous call
+    """
 
     class _SidebarState:
         ValueType = typing.NewType("ValueType", builtins.int)
@@ -66,6 +74,10 @@ class PageConfig(google.protobuf.message.Message):
         """Force the sidebar to be shown."""
         COLLAPSED: PageConfig._SidebarState.ValueType  # 2
         """Force the sidebar to be hidden."""
+        SIDEBAR_UNSET: PageConfig._SidebarState.ValueType  # 3
+        """Unset distinguishes that config was not provided - on initial call, will
+        set to auto as default. Otherwise, inherit value from previous call
+        """
 
     class SidebarState(_SidebarState, metaclass=_SidebarStateEnumTypeWrapper): ...
     AUTO: PageConfig.SidebarState.ValueType  # 0
@@ -74,6 +86,10 @@ class PageConfig(google.protobuf.message.Message):
     """Force the sidebar to be shown."""
     COLLAPSED: PageConfig.SidebarState.ValueType  # 2
     """Force the sidebar to be hidden."""
+    SIDEBAR_UNSET: PageConfig.SidebarState.ValueType  # 3
+    """Unset distinguishes that config was not provided - on initial call, will
+    set to auto as default. Otherwise, inherit value from previous call
+    """
 
     @typing.final
     class MenuItems(google.protobuf.message.Message):
@@ -84,11 +100,14 @@ class PageConfig(google.protobuf.message.Message):
         REPORT_A_BUG_URL_FIELD_NUMBER: builtins.int
         HIDE_REPORT_A_BUG_FIELD_NUMBER: builtins.int
         ABOUT_SECTION_MD_FIELD_NUMBER: builtins.int
+        CLEAR_ABOUT_MD_FIELD_NUMBER: builtins.int
         get_help_url: builtins.str
         hide_get_help: builtins.bool
         report_a_bug_url: builtins.str
         hide_report_a_bug: builtins.bool
         about_section_md: builtins.str
+        clear_about_md: builtins.bool
+        """For multiple calls to set_page_config, clears set about markdown"""
         def __init__(
             self,
             *,
@@ -97,8 +116,9 @@ class PageConfig(google.protobuf.message.Message):
             report_a_bug_url: builtins.str = ...,
             hide_report_a_bug: builtins.bool = ...,
             about_section_md: builtins.str = ...,
+            clear_about_md: builtins.bool = ...,
         ) -> None: ...
-        def ClearField(self, field_name: typing.Literal["about_section_md", b"about_section_md", "get_help_url", b"get_help_url", "hide_get_help", b"hide_get_help", "hide_report_a_bug", b"hide_report_a_bug", "report_a_bug_url", b"report_a_bug_url"]) -> None: ...
+        def ClearField(self, field_name: typing.Literal["about_section_md", b"about_section_md", "clear_about_md", b"clear_about_md", "get_help_url", b"get_help_url", "hide_get_help", b"hide_get_help", "hide_report_a_bug", b"hide_report_a_bug", "report_a_bug_url", b"report_a_bug_url"]) -> None: ...
 
     TITLE_FIELD_NUMBER: builtins.int
     FAVICON_FIELD_NUMBER: builtins.int
